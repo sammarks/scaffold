@@ -11,6 +11,7 @@ Basically, it sets up the style folders and `gulpfile` to jumpstart creating a n
 
 To get started, all you have to do is `cd` to the root of the repository, and then type:
 
+	npm install
 	gulp
 	
 Gulp will start, compile all of your CSS assets, move fonts to where they're supposed to go, and
