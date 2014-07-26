@@ -19,7 +19,8 @@ var paths = {
 	},
 	font: {
 		source: [
-			// 'bower_components/package-fonts/fonts/*'
+			// 'bower_components/package-fonts/fonts/*',
+			'fonts/*'
 		]
 	},
 	js: {
