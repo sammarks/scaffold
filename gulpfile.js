@@ -8,6 +8,9 @@ var paths = {
 			// 'bower_components/package-name/style.scss',
 			'scss/default.scss'
 		],
+		watch: [
+			'scss/**/*.scss',
+		],
 		destination: 'compiled/scss'
 	},
 	css: {
@@ -55,7 +58,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch(paths.scss.source, ['css']);
+	gulp.watch(paths.scss.watch, ['css']);
 	gulp.watch(paths.js.source, ['js']);
 	gulp.watch(paths.font.source, ['fonts']);
 });
