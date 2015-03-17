@@ -1,21 +1,17 @@
 var gulp = require('gulp');
 var sass = require('gulp-ruby-sass');
-var concat = require('gulp-concat');
+var concat = require('gulp-concat-sourcemap');
+var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
 	scss: {
-		source: [
-			// 'bower_components/package-name/style.scss',
-			'scss/default.scss'
-		],
+		source: 'scss/default.scss',
 		watch: [
 			'scss/**/*.scss',
-		],
-		destination: 'compiled/scss'
+		]
 	},
 	css: {
 		source: [
-			'compiled/scss/*.css',
 			// 'bower_components/package-name/style.css',
 			'css/**/*.css'
 		]
@@ -35,14 +31,17 @@ var paths = {
 };
 
 gulp.task('scss', function() {
-	return gulp.src(paths.scss.source)
-		.pipe(sass())
-		.pipe(gulp.dest(paths.scss.destination));
+	return sass(paths.scss.source, { sourcemap: true, trace: true })
+		.on('error', function (err) {
+			console.error('Error', err.message);
+		})
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest(paths.compiled));
 });
 
 gulp.task('css', ['scss'], function() {
 	gulp.src(paths.css.source)
-		.pipe(concat('default.css'))
+		.pipe(concat('css-concat.css'))
 		.pipe(gulp.dest(paths.compiled));
 });
 
@@ -64,3 +63,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['css', 'js', 'fonts', 'watch']);
+gulp.task('nowatch', ['css', 'js', 'fonts']);
